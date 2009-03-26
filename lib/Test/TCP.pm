@@ -2,15 +2,13 @@ package Test::TCP;
 use strict;
 use warnings;
 use 5.00800;
-our $VERSION = '0.02';
-use Sub::Exporter -setup => {
-    exports => [
-        qw/ empty_port test_tcp wait_port /
-    ],
-    groups => { default => [':all'] }
-};
+our $VERSION = '0.03';
+use base qw/Exporter/;
 use IO::Socket::INET;
 use Params::Validate ':all';
+use Test::SharedFork;
+
+our @EXPORT = qw/ empty_port test_tcp wait_port /;
 
 sub empty_port {
     my $port = shift || 10000;
@@ -40,7 +38,7 @@ sub test_tcp {
 
     my $port = $args{port};
 
-    if ( my $pid = fork() ) {
+    if ( my $pid = Test::SharedFork->fork() ) {
         # parent.
         wait_port($port);
 
@@ -109,6 +107,20 @@ Test::TCP - testing TCP program
             # run server
         },
     );
+
+using other server program
+
+    my $port = empty_port();
+    test_tcp(
+        client => sub {
+            my $port = shift;
+            # send request to the server
+        },
+        server => sub {
+            exec '/foo/bar/bin/server', 'options';
+        },
+    );
+
 
 =head1 DESCRIPTION
 
