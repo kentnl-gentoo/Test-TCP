@@ -2,7 +2,7 @@ package Test::TCP;
 use strict;
 use warnings;
 use 5.00800;
-our $VERSION = '0.08';
+our $VERSION = '0.09';
 use base qw/Exporter/;
 use IO::Socket::INET;
 use Test::SharedFork;
@@ -51,6 +51,7 @@ sub test_tcp {
     elsif ( $pid == 0 ) {
         # child
         $args{server}->($port);
+        exit;
     }
     else {
         die "fork failed: $!";
