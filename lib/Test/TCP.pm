@@ -2,7 +2,7 @@ package Test::TCP;
 use strict;
 use warnings;
 use 5.00800;
-our $VERSION = '0.09';
+our $VERSION = '0.10';
 use base qw/Exporter/;
 use IO::Socket::INET;
 use Test::SharedFork;
@@ -40,12 +40,22 @@ sub test_tcp {
         # parent.
         wait_port($port);
 
-        $args{client}->($port, $pid);
+        eval {
+            $args{client}->($port, $pid);
+        };
+        my $err = $@;
 
         kill TERM => $pid;
         waitpid( $pid, 0 );
-        if (WIFSIGNALED($?) && (split(' ', $Config{sig_name}))[WTERMSIG($?)] eq 'ABRT') {
-            Test::More::diag("your server received SIGABRT");
+        if (WIFSIGNALED($?)) {
+            my $signame = (split(' ', $Config{sig_name}))[WTERMSIG($?)];
+            if ($signame =~ /^(ABRT|PIPE)$/) {
+                Test::More::diag("your server received SIG$signame");
+            }
+        }
+
+        if ($err) {
+            die $err; # rethrow after cleanup.
         }
     }
     elsif ( $pid == 0 ) {
