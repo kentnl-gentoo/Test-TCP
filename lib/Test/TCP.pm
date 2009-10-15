@@ -2,7 +2,7 @@ package Test::TCP;
 use strict;
 use warnings;
 use 5.00800;
-our $VERSION = '0.12';
+our $VERSION = '0.13';
 use base qw/Exporter/;
 use IO::Socket::INET;
 use Test::SharedFork;
@@ -40,22 +40,32 @@ sub test_tcp {
         # parent.
         wait_port($port);
 
-        eval {
-            $args{client}->($port, $pid);
-        };
-        my $err = $@;
+        my $sig;
+        my $err;
+        {
+            local $SIG{INT}  = sub { $sig = "INT"; die "SIGINT received\n" };
+            local $SIG{PIPE} = sub { $sig = "PIPE"; die "SIGPIPE received\n" };
+            eval {
+                $args{client}->($port, $pid);
+            };
+            $err = $@;
 
-        kill TERM => $pid;
-        waitpid( $pid, 0 );
-        if (WIFSIGNALED($?)) {
-            my $signame = (split(' ', $Config{sig_name}))[WTERMSIG($?)];
-            if ($signame =~ /^(ABRT|PIPE)$/) {
-                Test::More::diag("your server received SIG$signame");
+            # cleanup
+            kill TERM => $pid;
+            waitpid( $pid, 0 );
+            if (WIFSIGNALED($?)) {
+                my $signame = (split(' ', $Config{sig_name}))[WTERMSIG($?)];
+                if ($signame =~ /^(ABRT|PIPE)$/) {
+                    Test::More::diag("your server received SIG$signame");
+                }
             }
         }
 
+        if ($sig) {
+            kill $sig, $$; # rethrow signal after cleanup
+        }
         if ($err) {
-            die $err; # rethrow after cleanup.
+            die $err; # rethrow exception after cleanup.
         }
     }
     elsif ( $pid == 0 ) {
@@ -165,6 +175,36 @@ Get the available port number, you can use.
     wait_port(8080);
 
 Waits for a particular port is available for connect.
+
+=back
+
+=head1 FAQ
+
+=over 4
+
+=item How to invoke two servers?
+
+You can call test_tcp() twice!
+
+    test_tcp(
+        client => sub {
+            my $port1 = shift;
+            test_tcp(
+                client => sub {
+                    my $port2 = shift;
+                    # some client code here
+                },
+                server => sub {
+                    my $port2 = shift;
+                    # some server2 code here
+                },
+            );
+        },
+        server => sub {
+            my $port1 = shift;
+            # some server1 code here
+        },
+    );
 
 =back
 
