@@ -2,7 +2,7 @@ package Test::TCP;
 use strict;
 use warnings;
 use 5.00800;
-our $VERSION = '0.14';
+our $VERSION = '0.15';
 use base qw/Exporter/;
 use IO::Socket::INET;
 use Test::SharedFork;
@@ -25,7 +25,7 @@ sub empty_port {
             LocalAddr => '127.0.0.1',
             LocalPort => $port,
             Proto     => 'tcp',
-            ReuseAddr => 1,
+            (($^O eq 'MSWin32') ? () : (ReuseAddr => 1)),
         );
         return $port if $sock;
     }
@@ -227,6 +227,8 @@ Tokuhiro Matsuno E<lt>tokuhirom@gmail.comE<gt>
 kazuhooku
 
 dragon3
+
+charsbar
 
 =head1 SEE ALSO
 
