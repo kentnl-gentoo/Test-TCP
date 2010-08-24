@@ -2,7 +2,7 @@ package Test::TCP;
 use strict;
 use warnings;
 use 5.00800;
-our $VERSION = '1.02_01';
+our $VERSION = '1.02_02';
 use base qw/Exporter/;
 use IO::Socket::INET;
 use Test::SharedFork;
@@ -17,10 +17,18 @@ my $TERMSIG = $^O eq 'MSWin32' ? 'KILL' : 'TERM';
 our @EXPORT = qw/ empty_port test_tcp wait_port /;
 
 sub empty_port {
-    my $port = shift || 10000;
-    $port = 19000 unless $port =~ /^[0-9]+$/ && $port < 19000;
+    my $port = do {
+        if (@_) {
+            my $p = $_[0];
+            $p = 19000 unless $p =~ /^[0-9]+$/ && $p < 19000;
+            $p;
+        } else {
+            10000 + int(rand()*1000);
+        }
+    };
 
     while ( $port++ < 20000 ) {
+        next if _check_port($port);
         my $sock = IO::Socket::INET->new(
             Listen    => 5,
             LocalAddr => '127.0.0.1',
