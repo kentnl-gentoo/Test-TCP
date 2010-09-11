@@ -2,10 +2,10 @@ package Test::TCP;
 use strict;
 use warnings;
 use 5.00800;
-our $VERSION = '1.04';
+our $VERSION = '1.05';
 use base qw/Exporter/;
 use IO::Socket::INET;
-use Test::SharedFork;
+use Test::SharedFork 0.12;
 use Test::More ();
 use Config;
 use POSIX;
@@ -48,7 +48,7 @@ sub test_tcp {
     }
     my $port = $args{port} || empty_port();
 
-    if ( my $pid = Test::SharedFork->fork() ) {
+    if ( my $pid = fork() ) {
         # parent.
         wait_port($port);
 
