@@ -2,7 +2,7 @@ package Test::TCP;
 use strict;
 use warnings;
 use 5.00800;
-our $VERSION = '1.06';
+our $VERSION = '1.07';
 use base qw/Exporter/;
 use IO::Socket::INET;
 use Test::SharedFork 0.12;
@@ -117,12 +117,14 @@ sub wait_port {
         Test::TCP::Guard;
     sub new {
         my ($class, %args) = @_;
-        bless { %args }, $class;
+        bless { %args, _mypid => $$ }, $class;
     }
     sub DESTROY {
         my ($self) = @_;
-        local $@;
-        $self->{code}->();
+        if ($self->{_mypid} == $$) {
+            local $@;
+            $self->{code}->();
+        }
     }
 }
 
@@ -241,6 +243,8 @@ dragon3
 charsbar
 
 Tatsuhiko Miyagawa
+
+lestrrat
 
 =head1 SEE ALSO
 
