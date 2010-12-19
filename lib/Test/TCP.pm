@@ -2,7 +2,7 @@ package Test::TCP;
 use strict;
 use warnings;
 use 5.00800;
-our $VERSION = '1.09';
+our $VERSION = '1.10';
 use base qw/Exporter/;
 use IO::Socket::INET;
 use Test::SharedFork 0.12;
@@ -120,7 +120,7 @@ sub start {
     }
 }
 
-sub DESTROY {
+sub stop {
     my $self = shift;
 
     return unless defined $self->{pid};
@@ -142,6 +142,12 @@ sub DESTROY {
             last LOOP;
         }
     }
+    undef $self->{pid};
+}
+
+sub DESTROY {
+    my $self = shift;
+    $self->stop();
 }
 
 1;
@@ -259,6 +265,10 @@ This parameter is required.
 =item $server->start()
 
 Start the server process. Normally, you don't need to call this method.
+
+=item $server->stop()
+
+Stop the server process.
 
 =item my $pid = $server->pid();
 
