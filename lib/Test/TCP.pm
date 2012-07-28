@@ -2,7 +2,7 @@ package Test::TCP;
 use strict;
 use warnings;
 use 5.00800;
-our $VERSION = '1.16';
+our $VERSION = '1.17';
 use base qw/Exporter/;
 use IO::Socket::INET;
 use Test::SharedFork 0.12;
@@ -79,7 +79,7 @@ sub wait_port {
 
     my $retry = 100;
     while ( $retry-- ) {
-        return if _check_port($port);
+        return if $^O eq 'MSWin32' ? `$^X -MTest::TCP::CheckPort -echeck_port $port` : _check_port( $port );
         Time::HiRes::sleep(0.1);
     }
     die "cannot open port: $port";
