@@ -2,7 +2,7 @@ package Test::TCP;
 use strict;
 use warnings;
 use 5.00800;
-our $VERSION = '1.17';
+our $VERSION = '1.18';
 use base qw/Exporter/;
 use IO::Socket::INET;
 use Test::SharedFork 0.12;
@@ -236,6 +236,16 @@ Test::TCP is test utilities for TCP/IP programs.
     my $port = empty_port();
 
 Get the available port number, you can use.
+
+Normally, empty_port() finds empty port number from 49152..65535.
+See L<http://www.iana.org/assignments/port-numbers>
+
+But you want to use another range, use a following form:
+
+    # 5963..65535
+    my $port = empty_port(5963);
+
+
 
 =item test_tcp
 
