@@ -2,7 +2,7 @@ package Test::TCP;
 use strict;
 use warnings;
 use 5.00800;
-our $VERSION = '1.20';
+our $VERSION = '1.21';
 use base qw/Exporter/;
 use IO::Socket::INET;
 use Test::SharedFork 0.12;
@@ -34,12 +34,8 @@ sub test_tcp {
 sub wait_port {
     my $port = shift;
 
-    my $retry = 100;
-    while ( $retry-- ) {
-        return if $^O eq 'MSWin32' ? `$^X -MNet::EmptyPort -echeck_port $port` : check_port( $port );
-        Time::HiRes::sleep(0.1);
-    }
-    die "cannot open port: $port";
+    Net::EmptyPort::wait_port($port, 0.1, 100)
+        or die "cannot open port: $port";
 }
 
 # ------------------------------------------------------------------------- 
