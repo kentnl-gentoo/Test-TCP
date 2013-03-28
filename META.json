@@ -31,7 +31,18 @@
          }
       }
    },
-   "provides" : {},
+   "provides" : {
+      "Net::EmptyPort" : {
+         "file" : "lib/Net/EmptyPort.pm"
+      },
+      "Test::TCP" : {
+         "file" : "lib/Test/TCP.pm",
+         "version" : "1.24"
+      },
+      "Test::TCP::CheckPort" : {
+         "file" : "lib/Test/TCP/CheckPort.pm"
+      }
+   },
    "release_status" : "stable",
    "resources" : {
       "bugtracker" : {
@@ -43,5 +54,5 @@
          "web" : "https://github.com/tokuhirom/Test-TCP"
       }
    },
-   "version" : "1.23"
+   "version" : "1.24"
 }
