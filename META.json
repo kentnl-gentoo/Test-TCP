@@ -14,15 +14,13 @@
    "prereqs" : {
       "build" : {
          "requires" : {
-            "ExtUtils::MakeMaker" : "6.59",
             "Test::More" : "0.98"
          }
       },
       "configure" : {
          "requires" : {
             "CPAN::Meta" : "0",
-            "Module::Build" : "0.38",
-            "Module::Build::Tiny" : "0"
+            "Module::Build" : "0.38"
          }
       },
       "develop" : {
@@ -48,7 +46,7 @@
       },
       "Test::TCP" : {
          "file" : "lib/Test/TCP.pm",
-         "version" : "1.25"
+         "version" : "1.26"
       },
       "Test::TCP::CheckPort" : {
          "file" : "lib/Test/TCP/CheckPort.pm"
@@ -65,5 +63,5 @@
          "web" : "https://github.com/tokuhirom/Test-TCP"
       }
    },
-   "version" : "1.25"
+   "version" : "1.26"
 }
