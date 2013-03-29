@@ -20,12 +20,23 @@
       },
       "configure" : {
          "requires" : {
-            "Module::Build::Tiny" : 0
+            "CPAN::Meta" : "0",
+            "Module::Build" : "0.38",
+            "Module::Build::Tiny" : "0"
+         }
+      },
+      "develop" : {
+         "requires" : {
+            "Pod::Wordlist::hanekomu" : "0",
+            "Test::CPAN::Meta" : "0",
+            "Test::MinimumVersion" : "0.10108",
+            "Test::Pod" : "1.41",
+            "Test::Spelling" : "0"
          }
       },
       "runtime" : {
          "requires" : {
-            "IO::Socket::INET" : 0,
+            "IO::Socket::INET" : "0",
             "Test::SharedFork" : "0.19",
             "perl" : "5.00800"
          }
@@ -37,7 +48,7 @@
       },
       "Test::TCP" : {
          "file" : "lib/Test/TCP.pm",
-         "version" : "1.24"
+         "version" : "1.25"
       },
       "Test::TCP::CheckPort" : {
          "file" : "lib/Test/TCP/CheckPort.pm"
@@ -54,5 +65,5 @@
          "web" : "https://github.com/tokuhirom/Test-TCP"
       }
    },
-   "version" : "1.24"
+   "version" : "1.25"
 }
