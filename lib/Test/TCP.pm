@@ -2,7 +2,7 @@ package Test::TCP;
 use strict;
 use warnings;
 use 5.00800;
-our $VERSION = '1.26';
+our $VERSION = '1.27';
 use base qw/Exporter/;
 use IO::Socket::INET;
 use Test::SharedFork 0.12;
@@ -34,7 +34,7 @@ sub test_tcp {
 sub wait_port {
     my $port = shift;
 
-    Net::EmptyPort::wait_port($port, 0.1, 100)
+    Net::EmptyPort::wait_port($port, 0.001, 100)
         or die "cannot open port: $port";
 }
 
@@ -127,6 +127,8 @@ sub DESTROY {
 
 1;
 __END__
+
+=for stopwords OO-ish
 
 =encoding utf8
 

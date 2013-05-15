@@ -5,7 +5,7 @@ use base qw/Exporter/;
 use IO::Socket::INET;
 use Time::HiRes ();
 
-our @EXPORT = qw/ empty_port check_port /;
+our @EXPORT = qw/ empty_port check_port wait_port /;
 
 # get a empty port on 49152 .. 65535
 # http://www.iana.org/assignments/port-numbers
@@ -112,7 +112,7 @@ Net::EmptyPort helps finding an empty TCP/UDP port.
 
 =over 4
 
-=item empty_port
+=item C<< empty_port() >>
 
     my $port = empty_port();
 
@@ -133,7 +133,7 @@ the second parameter:
     # use 49152..65535 range
     my $port = empty_port(undef, 'udp');
 
-=item check_port
+=item C<< check_port($port:Int) >>
 
     my $true_or_false = check_port(5000);
 
@@ -143,7 +143,7 @@ Also works for UDP:
 
     my $true_or_false = check_port(5000, 'udp');
 
-=item wait_port($port:Int[, $sleep:Number, $retry:Int, $proto:String])
+=item C<< wait_port($port:Int[, $sleep:Number, $retry:Int, $proto:String]) >>
 
 Waits for a particular port is available for connect.
 

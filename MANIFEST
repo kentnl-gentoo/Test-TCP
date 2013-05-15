@@ -1,5 +1,3 @@
-.gitignore
-.travis.yml
 Build.PL
 Changes
 LICENSE
@@ -20,8 +18,10 @@ t/07_optional.t
 t/08_exit.t
 t/09_fork.t
 t/10_oo.t
+t/11_net_empty_port.t
 t/Server.pm
 xt/02_perlcritic.t
 xt/04_dependents.t
 xt/author/11_net_emptyport.t
-xt/perlcriticrc
+META.yml
+MANIFEST
