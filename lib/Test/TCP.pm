@@ -2,7 +2,7 @@ package Test::TCP;
 use strict;
 use warnings;
 use 5.00800;
-our $VERSION = '1.28';
+our $VERSION = '1.29';
 use base qw/Exporter/;
 use IO::Socket::INET;
 use Test::SharedFork 0.12;
@@ -24,7 +24,7 @@ sub test_tcp {
         die "missing madatory parameter $k" unless exists $args{$k};
     }
     my $server_code = delete $args{server};
-    my $port = $args{port} || empty_port();
+    my $port = delete($args{port}) || empty_port();
 
     my $client_code = delete $args{client};
 
