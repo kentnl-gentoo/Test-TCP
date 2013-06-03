@@ -11,7 +11,7 @@ configure_requires:
   CPAN::Meta::Prereqs: 0
   Module::Build: 0.38
 dynamic_config: 0
-generated_by: 'Minilla/v0.4.3, CPAN::Meta::Converter version 2.130880'
+generated_by: 'Minilla/v0.4.5, CPAN::Meta::Converter version 2.131490'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -31,7 +31,7 @@ provides:
     file: lib/Net/EmptyPort.pm
   Test::TCP:
     file: lib/Test/TCP.pm
-    version: 1.29
+    version: 1.30
   Test::TCP::CheckPort:
     file: lib/Test/TCP/CheckPort.pm
 requires:
@@ -44,7 +44,7 @@ resources:
   bugtracker: https://github.com/tokuhirom/Test-TCP/issues
   homepage: https://github.com/tokuhirom/Test-TCP
   repository: git://github.com/tokuhirom/Test-TCP.git
-version: 1.29
+version: 1.30
 x_contributors:
   - 'tokuhirom <tokuhirom@d0d07461-0603-4401-acd4-de1884942a52>'
   - 'mattn <mattn@d0d07461-0603-4401-acd4-de1884942a52>'
@@ -57,5 +57,5 @@ x_contributors:
   - 'Thomas Klausner <domm@plix.at>'
   - 'Brendan Byrd <Perl@ResonatorSoft.org>'
   - 'Christian Walde <walde.christian@googlemail.com>'
-  - 'Tatsuhiko Miyagawa <miyagawa@bulknews.net>'
   - 'Pavel Shaydo <zwon@cpan.org>'
+  - 'Tatsuhiko Miyagawa <miyagawa@bulknews.net>'
