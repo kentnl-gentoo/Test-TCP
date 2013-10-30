@@ -4,8 +4,10 @@
       "Tokuhiro Matsuno <tokuhirom@gmail.com>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Minilla/v0.4.5",
-   "license" : "perl_5",
+   "generated_by" : "Minilla/v0.7.5",
+   "license" : [
+      "perl_5"
+   ],
    "meta-spec" : {
       "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
       "version" : "2"
@@ -19,7 +21,8 @@
          "share",
          "eg",
          "examples",
-         "author"
+         "author",
+         "builder"
       ]
    },
    "prereqs" : {
@@ -64,7 +67,7 @@
       },
       "Test::TCP" : {
          "file" : "lib/Test/TCP.pm",
-         "version" : "2.01"
+         "version" : "2.02"
       },
       "Test::TCP::CheckPort" : {
          "file" : "lib/Test/TCP/CheckPort.pm"
@@ -81,7 +84,7 @@
          "web" : "https://github.com/tokuhirom/Test-TCP"
       }
    },
-   "version" : "2.01",
+   "version" : "2.02",
    "x_contributors" : [
       "tokuhirom <tokuhirom@d0d07461-0603-4401-acd4-de1884942a52>",
       "mattn <mattn@d0d07461-0603-4401-acd4-de1884942a52>",

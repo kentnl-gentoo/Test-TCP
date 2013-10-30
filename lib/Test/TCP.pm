@@ -2,7 +2,7 @@ package Test::TCP;
 use strict;
 use warnings;
 use 5.00800;
-our $VERSION = '2.01';
+our $VERSION = '2.02';
 use base qw/Exporter/;
 use IO::Socket::INET;
 use Test::SharedFork 0.12;
@@ -76,21 +76,20 @@ sub port { $_[0]->{port} }
 
 sub start {
     my $self = shift;
-    if ( my $pid = fork() ) {
-        # parent.
+    my $pid = fork();
+    die "fork() failed: $!" unless defined $pid;
+
+    if ( $pid ) { # parent process.
         $self->{pid} = $pid;
         Test::TCP::wait_port($self->port, $self->{max_wait});
         return;
-    } elsif ($pid == 0) {
-        # child process
+    } else { # child process
         $self->{code}->($self->port);
         # should not reach here
         if (kill 0, $self->{_my_pid}) { # warn only parent process still exists
             warn("[Test::TCP] Child process does not block(PID: $$, PPID: $self->{_my_pid})");
         }
         exit 0;
-    } else {
-        die "fork failed: $!";
     }
 }
 

@@ -11,7 +11,7 @@ configure_requires:
   CPAN::Meta::Prereqs: 0
   Module::Build: 0.38
 dynamic_config: 0
-generated_by: 'Minilla/v0.4.5, CPAN::Meta::Converter version 2.131490'
+generated_by: 'Minilla/v0.7.5, CPAN::Meta::Converter version 2.132510'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -26,12 +26,13 @@ no_index:
     - eg
     - examples
     - author
+    - builder
 provides:
   Net::EmptyPort:
     file: lib/Net/EmptyPort.pm
   Test::TCP:
     file: lib/Test/TCP.pm
-    version: 2.01
+    version: 2.02
   Test::TCP::CheckPort:
     file: lib/Test/TCP/CheckPort.pm
 requires:
@@ -44,7 +45,7 @@ resources:
   bugtracker: https://github.com/tokuhirom/Test-TCP/issues
   homepage: https://github.com/tokuhirom/Test-TCP
   repository: git://github.com/tokuhirom/Test-TCP.git
-version: 2.01
+version: 2.02
 x_contributors:
   - 'tokuhirom <tokuhirom@d0d07461-0603-4401-acd4-de1884942a52>'
   - 'mattn <mattn@d0d07461-0603-4401-acd4-de1884942a52>'
