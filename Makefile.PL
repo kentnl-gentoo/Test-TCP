@@ -27,10 +27,10 @@ if ($ExtUtils::MakeMaker::VERSION >= 6.64) {
 
     $args{CONFIGURE_REQUIRES} = {"ExtUtils::MakeMaker" => "6.64"};
     $args{BUILD_REQUIRES}     = {};
-    $args{TEST_REQUIRES}      = {"Socket" => 0,"Test::More" => "0.98","File::Temp" => 0};
-    $args{PREREQ_PM}          = {"IO::Socket::INET" => 0,"Time::HiRes" => 0,"Test::More" => 0,"Test::SharedFork" => "0.19","perl" => "5.008001"};
+    $args{TEST_REQUIRES}      = {"Test::More" => "0.98","Socket" => 0,"File::Temp" => 0};
+    $args{PREREQ_PM}          = {"perl" => "5.008001","Test::More" => 0,"IO::Socket::INET" => 0,"Test::SharedFork" => "0.19","Time::HiRes" => 0};
 } else {
-    $args{PREREQ_PM}          = {"IO::Socket::INET" => 0,"File::Temp" => 0,"Test::More" => "0.98","perl" => "5.008001","Socket" => 0,"ExtUtils::MakeMaker" => "6.64","Time::HiRes" => 0,"Test::SharedFork" => "0.19"};
+    $args{PREREQ_PM}          = {"Test::More" => "0.98","IO::Socket::INET" => 0,"Socket" => 0,"perl" => "5.008001","ExtUtils::MakeMaker" => "6.64","File::Temp" => 0,"Test::SharedFork" => "0.19","Time::HiRes" => 0};
 }
 
 if ($ExtUtils::MakeMaker::VERSION >= 6.57_01) {
