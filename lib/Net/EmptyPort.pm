@@ -16,12 +16,12 @@ sub empty_port {
             $p = 49152 unless $p =~ /^[0-9]+$/ && $p < 49152;
             $p;
         } else {
-            50000 + int(rand()*1000);
+            50000 + (int(rand()*1500) + abs($$)) % 1500;
         }
     };
     my $proto = $_[1] ? lc($_[1]) : 'tcp';
 
-    while ( $port++ < 60000 ) {
+    while ( $port++ < 65000 ) {
         # Remote checks don't work on UDP, and Local checks would be redundant here...
         next if ($proto eq 'tcp' && check_port($port));
 
@@ -88,13 +88,14 @@ sub wait_port {
     if (@_==4) {
         # backward compat.
         ($port, (my $sleep), (my $retry), $proto) = @_;
-        $max_wait = $max_wait*$retry;
+        $max_wait = $sleep * $retry;
         $proto = $proto ? lc($proto) : 'tcp';
     } else {
         ($port, $max_wait, $proto) = @_;
         $proto = $proto ? lc($proto) : 'tcp';
     }
 
+    $max_wait = 10 unless defined $max_wait;
     my $waiter = _make_waiter($max_wait);
 
     while ( $waiter->() ) {
@@ -174,7 +175,8 @@ This method waits the C<< $port >> number is ready to accept a request.
 
 C<$port> is a port number to check.
 
-Sleep up to C<$max_wait> seconds for checking the port.
+Sleep up to C<$max_wait> seconds (10 seconds by default) for checking the
+port.
 
 I<Return value> : Return true if the port is available, false otherwise.
 
