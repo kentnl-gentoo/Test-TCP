@@ -1,5 +1,9 @@
 Revision history for Perl module Test::TCP
 
+2.05 2014-06-24T00:49:45Z
+
+    - Release again with latest minil.
+
 2.04 2014-06-23T23:42:28Z
 
     - Release.
