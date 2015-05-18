@@ -2,7 +2,7 @@ package Test::TCP;
 use strict;
 use warnings;
 use 5.00800;
-our $VERSION = '2.11';
+our $VERSION = '2.12';
 use base qw/Exporter/;
 use IO::Socket::INET;
 use Test::SharedFork 0.12;
@@ -358,7 +358,7 @@ You can use C<exec()> in child process.
 
 =item How do I use address other than "127.0.0.1" for testing?
 
-You can use the C<< host >> paramater to specify the bind address.
+You can use the C<< host >> parameter to specify the bind address.
 
     # let the server bind to "0.0.0.0" for testing
     test_tcp(
