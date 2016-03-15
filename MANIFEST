@@ -22,6 +22,7 @@ t/10_oo.t
 t/11_net_empty_port.t
 t/12_pass_wait_port_options.t
 t/13_undef_port.t
+t/14_listen.t
 t/Server.pm
 xt/02_perlcritic.t
 xt/04_dependents.t
