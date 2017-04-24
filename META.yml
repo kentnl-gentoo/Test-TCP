@@ -9,7 +9,7 @@ build_requires:
 configure_requires:
   ExtUtils::MakeMaker: '6.64'
 dynamic_config: 0
-generated_by: 'Minilla/v3.0.4, CPAN::Meta::Converter version 2.150005'
+generated_by: 'Minilla/v3.0.9, CPAN::Meta::Converter version 2.150010'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -30,7 +30,7 @@ provides:
     file: lib/Net/EmptyPort.pm
   Test::TCP:
     file: lib/Test/TCP.pm
-    version: '2.17'
+    version: '2.18'
   Test::TCP::CheckPort:
     file: lib/Test/TCP/CheckPort.pm
 requires:
@@ -44,7 +44,7 @@ resources:
   bugtracker: https://github.com/tokuhirom/Test-TCP/issues
   homepage: https://github.com/tokuhirom/Test-TCP
   repository: git://github.com/tokuhirom/Test-TCP.git
-version: '2.17'
+version: '2.18'
 x_contributors:
   - 'tokuhirom <tokuhirom@d0d07461-0603-4401-acd4-de1884942a52>'
   - 'mattn <mattn@d0d07461-0603-4401-acd4-de1884942a52>'
@@ -70,5 +70,8 @@ x_contributors:
   - 'David Precious <davidp@preshweb.co.uk>'
   - 'Alex Vandiver <alex@chmrr.net>'
   - 'richard.leach <richard.leach@nccgroup.com>'
+  - 'openstrike <git@openstrike.co.uk>'
+  - 'Pete Houston <githubdevteam@openstrike.co.uk>'
   - 'Syohei YOSHIDA <syohex@gmail.com>'
+  - 'Ichito Nagata <i.nagata110@gmail.com>'
 x_serialization_backend: 'CPAN::Meta::YAML version 0.018'
